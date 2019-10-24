@@ -19,19 +19,30 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('layouts.backend');
 });
 
+
 Route::prefix('/')->namespace('Frontend')->group(function() {
-    //Route::get('', 'FrontController@index')->name('frontend.index');
-//    Route::get('category/{slug}', 'FrontController@category')->name('frontend.category');
-//    Route::get('subcategory/{slug}', 'FrontController@subcategory')->name('frontend.subcategory');
-//    Route::get('product_line/{slug}', 'FrontController@product_line')->name('frontend.product_line');
-//    Route::get('product/{slug}', 'FrontController@product')->name('frontend.product');
-//    Route::post('cart/add', 'CartController@add')->name('frontend.cart.add');
-//    Route::get('cart', 'CartController@index')->name('frontend.cart.index');
-//    Route::delete('cart/delete/{id}', 'CartController@destroy')->name('cart.destroy');
+    Route::get('', 'FrontController@index')->name('frontend.index');
+    Route::get('gallery', 'FrontController@gallery')->name('frontend.gallery');
+    Route::get('contact', 'FrontController@contact')->name('frontend.contact');
+    Route::get('about', 'FrontController@about')->name('frontend.about');
+    Route::get('event_detail/{id}', 'FrontController@event_detail')->name('frontend.event_detail');
+    Route::get('event', 'FrontController@event')->name('frontend.event');
+    Route::get('past_event', 'FrontController@past_event')->name('frontend.past_event');
+    Route::get('upcomming_event', 'FrontController@upcomming_event')->name('frontend.upcomming_event');
+    Route::get('service/{id}', 'FrontController@service')->name('frontend.service');
+    Route::get('latest_event', 'FrontController@latest_event')->name('frontend.latest_event');
+    Route::get('faq', 'FrontController@faq')->name('frontend.faq');
+    Route::get('terms', 'FrontController@terms')->name('frontend.terms');
+    Route::get('category/{id}', 'FrontController@category')->name('frontend.category');
+    Route::post('contact','FrontController@contact_store')->name('contact.store');
+    Route::post('booking','FrontController@store')->name('booking.store');
+    Route::get('/search', 'FrontController@search')->name('frontend.search');
+
 
 });
 
@@ -43,6 +54,7 @@ Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(functi
     Route::get('event/{id}/edit','EventController@edit')->name('event.edit');
     Route::put('event/{id}','EventController@update')->name('event.update');
     Route::delete('event/{id}', 'EventController@destroy')->name('event.destroy');
+    Route::get('/search', 'EventController@search')->name('event.search');
 
     Route::get('category','CategoryController@index')->name('category.index');
     Route::get('category/create','CategoryController@create')->name('category.create');
@@ -51,22 +63,6 @@ Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(functi
     Route::get('category/{id}/edit','CategoryController@edit')->name('category.edit');
     Route::put('category/{id}','CategoryController@update')->name('category.update');
     Route::delete('category/{id}', 'CategoryController@destroy')->name('category.destroy');
-
-    Route::get('booking','BookingController@index')->name('booking.index');
-    Route::get('booking/create','BookingController@create')->name('booking.create');
-    Route::post('booking','BookingController@store')->name('booking.store');
-    Route::get('booking/{id}','BookingController@show')->name('booking.show');
-    Route::get('booking/{id}/edit','BookingController@edit')->name('booking.edit');
-    Route::put('booking/{id}','BookingController@update')->name('booking.update');
-    Route::delete('booking/{id}', 'BookingController@destroy')->name('booking.destroy');
-
-    Route::get('contact','ContactController@index')->name('contact.index');
-    Route::get('contact/create','ContactController@create')->name('contact.create');
-    Route::post('contact','ContactController@store')->name('contact.store');
-    Route::get('contact/{id}','ContactController@show')->name('contact.show');
-    Route::get('contact/{id}/edit','ContactController@edit')->name('contact.edit');
-    Route::put('contact/{id}','ContactController@update')->name('contact.update');
-    Route::delete('contact/{id}', 'ContactController@destroy')->name('contact.destroy');
 
     Route::get('gallery','GalleryController@index')->name('gallery.index');
     Route::get('gallery/create','GalleryController@create')->name('gallery.create');
@@ -159,6 +155,12 @@ Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(functi
     Route::put('page/{id}','PageController@update')->name('page.update');
     Route::delete('page/{id}', 'PageController@destroy')->name('page.destroy');
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    'vendor\UniSharp\LaravelFilemanager\Lfm::routes()';
+});
+
+Route::get('/profile','HomeController@profile')->name('backend.profile');
 
 Auth::routes();
 

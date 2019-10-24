@@ -71,6 +71,7 @@ class SliderController extends Controller
     public function show($id)
     {
         $data['slider']=Slider::find($id);
+        $data['sliders']=Slider::where('id', $id)->get();
         return view('backend.slider.show',compact('data'));
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Permission Create page')
+@section('title','Permission view page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -15,9 +15,9 @@
                 List
             </a>        </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Permission</a></li>
-            <li class="active">Create Permission</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('permission.index')}}">Permission</a></li>
+            <li class="active">View Permission</li>
         </ol>
     </section>
 
@@ -27,7 +27,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Permission</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -90,6 +90,23 @@
                                 {{\App\User::find($data['permission']->updated_by)->name}}
                             @endif
                             {{$data['permission']->updated_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['permissions'] as $permission)
+                            <td>
+                                <a href="{{route('permission.edit',$permission->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('permission.destroy',$permission->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
                     </tr>
                     </thead>
                 </table>

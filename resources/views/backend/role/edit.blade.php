@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Role Create page')
+@section('title','Role edit page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,9 +16,9 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Role</a></li>
-            <li class="active">Create page</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('role.index')}}">Role</a></li>
+            <li class="active">Edit page</li>
         </ol>
     </section>
 
@@ -27,7 +27,7 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Title</h3>
+            <h3 class="box-title">Edit Page</h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"

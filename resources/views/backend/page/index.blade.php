@@ -12,9 +12,9 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Page</a></li>
-            <li class="active">Create page</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('page.create')}}">Page</a></li>
+            <li class="active">Index page</li>
         </ol>
     </section>
 
@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Title</h3>
+                <h3 class="box-title">Index Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -41,26 +41,22 @@
                     <tr>
                         <th>SN</th>
                         <th>Name</th>
-                        <th>Rank</th>
+                        <th>Title</th>
                         <th>Slug</th>
                         <th>Image</th>
-                        <th>Meta Description</th>
-                        <th>Meta Keyword</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @php($i=1)
-                    @foreach($data['categories'] as $page)
+                    @foreach($data['pages'] as $page)
                         <tr>
                             <td>{{$i++}}</td>
                             <td>{{$page->name}}</td>
-                            <td>{{$page->rank}}</td>
+                            <td>{{$page->title}}</td>
                             <td>{{$page->slug}}</td>
                             <td>{{$page->image}}</td>
-                            <td>{{$page->meta_description}}</td>
-                            <td>{{$page->meta_keyword}}</td>
                             <td>
                                 @if($page->status==1)
                                     <span class="label label-success">Active</span>

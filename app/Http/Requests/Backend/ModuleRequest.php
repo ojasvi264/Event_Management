@@ -24,7 +24,7 @@ class ModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'max:191|string|required:modules',
+            'name' => 'required|max:191|string',
             'route' => 'required|string',
         ];
     }
@@ -36,7 +36,7 @@ class ModuleRequest extends FormRequest
             'name.unique'=>'Name must be unique',
             'name.string'=>'Name must be of string type',
             'route.required'=>'Please Enter route',
-            'rank.string'=>'Route must be of string type',
+            'route.string'=>'Route must be of string type',
         ];
     }
 }

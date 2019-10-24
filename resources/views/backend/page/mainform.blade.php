@@ -23,6 +23,24 @@
     @include('includes.single_field_validation',['field'=>'photo'])
 </div>
 <div class="form-group">
+    {!!  Form::label('title', 'Title'); !!}
+    {!! Form::text('title', null,['class' => 'form-control','id' => 'title']); !!}
+
+    @include('includes.single_field_validation',['field'=>'title'])
+</div>
+<div class="form-group">
+    {!!  Form::label('description', 'Description'); !!}
+    {!! Form::text('description', null,['class' => 'form-control','id' => 'description']); !!}
+
+    @include('includes.single_field_validation',['field'=>'description'])
+</div>
+<div class="form-group">
+    {!!  Form::label('short_description', 'Short Description'); !!}
+    {!! Form::text('short_description', null,['class' => 'form-control','id' => 'short_description']); !!}
+
+    @include('includes.single_field_validation',['field'=>'short_description'])
+</div>
+<div class="form-group">
     {!!  Form::label('static_key', 'Static Key'); !!}
     {!! Form::radio('static_key', '1') !!} Active
     {!! Form::radio('static_key', '0',true) !!} De Active

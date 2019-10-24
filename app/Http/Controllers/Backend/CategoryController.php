@@ -52,8 +52,6 @@ class CategoryController extends Controller
             $category_image->move($destinationPath, $image_name);
             $request->request->add(['image' => $image_name]);
         }
-
-
         $category = Category::create($request->all());
 
         if ($category) {
@@ -76,6 +74,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $data['category']=Category::find($id);
+        $data['categories']=Category::where('id', $id)->get();
         return view('backend.category.show', compact('data'));
     }
 
@@ -140,5 +139,4 @@ class CategoryController extends Controller
             }
             return redirect()->route('category.index');
         }
-
 }

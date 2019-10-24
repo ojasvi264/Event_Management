@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Slider Create page')
+@section('title','Slider view page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,9 +16,9 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Slider</a></li>
-            <li class="active">Create Slider</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('slider.index')}}">Slider</a></li>
+            <li class="active">View Slider</li>
         </ol>
     </section>
 
@@ -28,7 +28,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Slider</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -95,6 +95,23 @@
                                 {{\App\User::find($data['slider']->updated_by)->name}}
                             @endif
                             {{$data['slider']->updated_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['sliders'] as $slider)
+                            <td>
+                                <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('slider.destroy',$slider->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
                     </tr>
                     </thead>
                 </table>

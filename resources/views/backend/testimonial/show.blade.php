@@ -15,8 +15,8 @@
                 List
             </a>        </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Testimonial</a></li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('testimonial.index')}}">Testimonial</a></li>
             <li class="active">View page</li>
         </ol>
     </section>
@@ -27,7 +27,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Title</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -75,6 +75,23 @@
                     <tr>
                         <th>Deleted At</th>
                         <td></td>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['testimonials'] as $testimonial)
+                            <td>
+                                <a href="{{route('testimonial.edit',$testimonial->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('testimonial.destroy',$testimonial->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
                     </tr>
                     </thead>
                 </table>

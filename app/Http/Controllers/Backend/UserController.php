@@ -66,6 +66,7 @@ class UserController extends Controller
     public function show($id)
     {
         $data['user']=User::find($id);
+        $data['users']=User::where('id', $id)->get();
         return view('backend.user.show',compact('data'));
     }
 

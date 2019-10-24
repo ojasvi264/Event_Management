@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label for="role_id">Role id</label>
+    {!!  Form::label('role_id', 'Role Name'); !!}
     {!! Form::select('role_id', $data['roles'],null,['class' => 'form-control']); !!}
 </div>
 <div class="form-group">

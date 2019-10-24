@@ -41,7 +41,6 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        dd($request);
         $request->request->add(['created_by' => Auth::user()->id]);
         if (!empty($request->has('photo'))) {
             //dd($request->all());
@@ -76,6 +75,7 @@ class PageController extends Controller
     public function show($id)
     {
         $data['page']=Page::find($id);
+        $data['pages']=Page::where('id', $id)->get();
         return view('backend.page.show', compact('data'));
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Module Create page')
+@section('title','Module view page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,8 +16,8 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Module</a></li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('module.index')}}">Module</a></li>
             <li class="active">Create page</li>
         </ol>
     </section>
@@ -28,7 +28,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Module</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -80,6 +80,23 @@
                                 {{\App\User::find($data['module']->updated_by)->name}}
                             @endif
                             {{$data['module']->updated_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['modules'] as $module)
+                            <td>
+                                <a href="{{route('module.edit',$module->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('module.destroy',$module->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
                     </tr>
                     </thead>
                 </table>

@@ -66,6 +66,7 @@ class PermissionController extends Controller
     {
         $data['modules'] = Module::pluck('name','id');
         $data['permission']=Permission::find($id);
+        $data['permissions']=Permission::where('id', $id)->get();
         return view('backend.permission.show',compact('data'));
     }
 

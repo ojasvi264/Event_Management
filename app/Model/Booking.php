@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $table='bookings';
-    Protected $fillable=['name','email','location','date','phone','time'];
+    Protected $fillable=['location','name','email','date','phone','time','event_id'];
+}
+function event(){
+    return  $this->belongsTo(Event::class);
 }

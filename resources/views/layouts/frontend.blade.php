@@ -1,10 +1,3 @@
-
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,379 +8,132 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Custom Theme files -->
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link href="css/font-awesome.css" rel="stylesheet">		<!-- font-awesome icons -->
+    <link href="{{asset('frontend/css/bootstrap.css')}}" type="text/css" rel="stylesheet" media="all">
+    <link href="{{asset('frontend/css/style.css')}}" type="text/css" rel="stylesheet" media="all">
+    <link href="{{asset('frontend/css/font-awesome.css')}}" rel="stylesheet">		<!-- font-awesome icons -->
+    <link rel="stylesheet" href="{{asset('frontend/css/lightbox.css')}}">
     <!-- //Custom Theme files -->
     <!-- js -->
-    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="{{asset('frontend/js/jquery-2.2.3.min.js')}}"></script>
     <!-- //js -->
     <!-- web-fonts -->
     <link href="//fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- //web-fonts -->
+    {{--@yield('css')--}}
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<!-- banner -->
-<div id="home" class="w3ls-banner">
 
-    <!-- banner-text -->
-    <div class="slider">
-        <div class="callbacks_container">
-            <ul class="rslides callbacks callbacks1" id="slider4">
-                <li>
-                    <div class="w3layouts-banner-top">
+    <div class="header-w3layouts">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <h1><a class="navbar-brand" href="{{route('frontend.event')}}">Events</a></h1>
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Events</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {{--<h1><a class="navbar-brand" href="{{route('frontend.event')}}">Events</a></h1>--}}
+                </div>
 
-                        <div class="container">
-                            <div class="agileits-banner-info">
-                                <h3>We Celebrate  <span>Birthday Parties</span></h3>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</p>
-                                <div class="agileits_w3layouts_more menu__item">
-                                    <a href="#" class="menu__link" data-toggle="modal" data-target="#myModal">Learn More</a>
-                                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        {{--<li class="hidden"><a class="page-scroll" href="#page-top"></a>	</li>--}}
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('/') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.index')}}">Home</a></li>
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('event') ? 'active' : '' !!} {!! \Illuminate\Support\Facades\Request::is('category/*') ? 'active' : '' !!} {!! \Illuminate\Support\Facades\Request::is('event_detail/*') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.event')}}">Events</a></li>
+                        {{--<li class="dropdown">--}}
+                            {{--<a href="#" class="dropdown-toggle hvr-sweep-to-right" data-hover="Pages" data-toggle="dropdown">Pages <b class="caret"></b></a>--}}
+                            {{--<ul class="dropdown-menu">--}}
+                                {{--<li><a class="hvr-sweep-to-right" href="icons.html">Icons</a></li>--}}
+                                {{--<li><a class="hvr-sweep-to-right" href="typography.html">Short Codes</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('gallery') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.gallery')}}">Gallery</a></li>
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('past_event') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.past_event')}}">Past Events</a></li>
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('upcomming_event') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.upcomming_event')}}">Upcomming Events</a></li>
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('about') ? 'active' : '' !!}" ><a class="hvr-sweep-to-right" href="{{route('frontend.about')}}">About</a></li>
+
+                        <li class="{!! \Illuminate\Support\Facades\Request::is('contact') ? 'active' : '' !!}"><a class="hvr-sweep-to-right" href="{{route('frontend.contact')}}">Contact</a></li>
+                        <form action="{{route('frontend.search')}}" method="get" class="sidebar-form">
+                            @csrf
+                            <div class="input-group">
+                                <input type="search" name="search" class="form-control" placeholder="Search events....">
+                                <span class="input-group-btn">
+                                    <button type="submit" name="" id="" class="form-control"><i class="fa fa-search"></i></button>
+                                  </span>
                             </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3layouts-banner-top w3layouts-banner-top1">
-                        <div class="container">
-                            <div class="agileits-banner-info">
-                                <h3>We Celebrate  <span>Newyear Parties</span></h3>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</p>
-                                <div class="agileits_w3layouts_more menu__item">
-                                    <a href="#" class="menu__link" data-toggle="modal" data-target="#myModal">Learn More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3layouts-banner-top w3layouts-banner-top2">
-                        <div class="container">
-                            <div class="agileits-banner-info">
-                                <h3>We Celebrate  <span>Marriage Functions</span></h3>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</p>
-                                <div class="agileits_w3layouts_more menu__item">
-                                    <a href="#" class="menu__link" data-toggle="modal" data-target="#myModal">Learn More</a>
-                                </div>
-                            </div>
+                        </form>
+                        {{--@if(isset($events))--}}
+                            {{--<p>The search results for your query <b>{{$query}}</b>are :</p>--}}
+                            {{--<h1>Sample Event Details:</h1>--}}
+                            {{--<table class="table table-stripped">--}}
+                                {{--<thead>--}}
+                                {{--<tr>--}}
+                                    {{--<th>SN</th>--}}
+                                    {{--<th>Name</th>--}}
+                                    {{--<th>Title</th>--}}
+                                    {{--<th>Action</th>--}}
+                                {{--</tr>--}}
+                                {{--</thead>--}}
+                                {{--<tbody>--}}
+                                {{--@php($i=1)--}}
+                                {{--@foreach($data['events'] as $event)--}}
+                                    {{--<tr>--}}
+                                        {{--<td>{{$i++}}</td>--}}
+                                        {{--<td>{{$data['event']->name}}</td>--}}
+                                        {{--<td>{{$data['event']->title}}</td>--}}
+                                        {{--<td>--}}
+                                            {{--<a href="{{route('event.show',$event->id)}}" class="btn btn-info">--}}
+                                                {{--<i class="fa fa-eye"></i>--}}
+                                                {{--View--}}
+                                            {{--</a>--}}
+                                            {{--<a href="{{route('event.edit',$event->id)}}" class="btn btn-warning">--}}
+                                                {{--<i class="fa fa-pencil"></i>--}}
+                                                {{--Edit--}}
+                                            {{--</a>--}}
+                                            {{--<form action="{{route('event.destroy',$event->id)}}" method="post"--}}
+                                                  {{--onsubmit="return confirm('Are you sure?')">--}}
+                                                {{--@csrf--}}
+                                                {{--<input type="hidden" name="_method" value="DELETE"/>--}}
+                                                {{--<button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>--}}
+                                            {{--</form>--}}
+                                        {{--</td>--}}
+                                    {{--</tr>--}}
+                                    {{--@endforeach--}}
+                                {{--</tbody>--}}
+                            {{--</table>--}}
+                            {{--@endif--}}
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
 
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="clearfix"> </div>
+    </div>
+    {{--</div>--}}
 
-        <!--banner Slider starts Here-->
+
+
+    <div class="content">
+        @yield('content')
     </div>
 
 
-</div>
-<!-- //banner -->
-<!-- header -->
-<div class="header-w3layouts">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Events</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <h1><a class="navbar-brand" href="index.html">Events</a></h1>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden"><a class="page-scroll" href="#page-top"></a>	</li>
-                    <li><a class="hvr-sweep-to-right" href="index.html">Home</a></li>
-                    <li><a class="hvr-sweep-to-right" href="about.html">About</a></li>
-                    <li><a class="hvr-sweep-to-right" href="events.html">Events</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle hvr-sweep-to-right" data-hover="Pages" data-toggle="dropdown">Pages <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="hvr-sweep-to-right" href="icons.html">Icons</a></li>
-                            <li><a class="hvr-sweep-to-right" href="typography.html">Short Codes</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="hvr-sweep-to-right" href="gallery.html">Gallery</a></li>
-                    <li><a class="hvr-sweep-to-right" href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-</div>
+
+
+
+{{--</div>--}}
+
 <!-- //header -->
-<!-- ser_agile -->
-<div class="ser_agile">
-    <div class="container">
-        <h2 class="heading-agileinfo">Welcome<span>Events is a professionally managed Event</span></h2>
-        <p>Masagni dolores eoquie int Basmodi temporant, ut laboreas dolore magnam aliquam kuytase uaeraquis autem vel eum iure reprehend.Unicmquam eius, Basmodi temurer sehsMunim.Masagni dolores eoquie int Basmodi temporant, ut laboreas dolore magnam aliquam kuytase uaeraquis autem vel eum iure reprehend.</p>
-        <div class="ser_w3l">
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Birthday</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-headphones" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Sangeet</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Weddings</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-camera" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Photography</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-cutlery" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Catering</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="outer-wrapper">
-                <div class="inner-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-tasks" aria-hidden="true"></i>
-                    </div>
-                    <div class="content-wrapper">
-                        <h4>Promotions</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, magni.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- //ser_agile -->
-<!-- Stats -->
-<div class="stats-agileits">
-    <div class="container">
-        <h3 class="heading-agileinfo white-w3ls">We Have Something To Be Proud Of<span class="black-w3ls">Events is a professionally managed Event</span></h3>
-    </div>
-    <div class="stats-info agileits w3layouts">
-        <div class="container">
-            <div class="col-md-4 col-sm-4agileits w3layouts stats-grid stats-grid-1">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                <div class="numscroller agileits-w3layouts" data-slno='1' data-min='0' data-max='2500' data-delay='3' data-increment="2">2500</div>
-                <div class="stat-info-w3ls">
-                    <h4 class="agileits w3layouts">Happy Clients</h4>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 agileits w3layouts stats-grid stats-grid-2">
-                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-                <div class="numscroller agileits-w3layouts" data-slno='1' data-min='0' data-max='1000' data-delay='3' data-increment="2">1000</div>
-                <div class="stat-info-w3ls">
-                    <h4 class="agileits w3layouts">Events</h4>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 stats-grid agileits w3layouts stats-grid-3">
-                <i class="fa fa-cog" aria-hidden="true"></i>
-                <div class="numscroller agileits-w3layouts" data-slno='1' data-min='0' data-max='3421' data-delay='3' data-increment="2">3421</div>
-                <div class="stat-info-w3ls">
-                    <h4 class="agileits w3layouts">Services</h4>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- //Stats -->
 
-<!-- showcase_w3layouts -->
-<div class="showcase_w3layouts">
-    <div class="container">
-        <h3 class="heading-agileinfo">Services<span>Events is a professionally managed Event</span></h3>
-        <div class="our_agile-info">
-            <div class="showcase">
-                <div class="thumbnail thumbnail--awesome">
-                    <div class="thumbnail__overlay">
-
-                    </div>
-                </div>
-                <div class="desc">
-
-                    <h4>Birthday</h4>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-                    </p>
-                </div>
-            </div>
-
-            <div class="showcase showcase--inverted">
-                <div class="desc">
-
-                    <h4>Wedding</h4>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-                    </p>
-                </div>
-                <div class="thumbnail thumbnail--awesome1">
-                    <div class="thumbnail__overlay">
-
-                    </div>
-                </div>
-            </div>
-            <div class="showcase">
-                <div class="thumbnail thumbnail--awesome2">
-                    <div class="thumbnail__overlay">
-
-                    </div>
-                </div>
-                <div class="desc">
-
-                    <h4>Sangeet</h4>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-                    </p>
-                </div>
-            </div>
-            <div class="showcase showcase--inverted">
-                <div class="desc">
-
-                    <h4>Catering</h4>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-                    </p>
-                </div>
-                <div class="thumbnail thumbnail--awesome3">
-                    <div class="thumbnail__overlay">
-
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- //showcase_w3layouts -->
-<section class="about_agile">
-    <div class="container">
-        <h3 class="heading-agileinfo white-w3ls">Event Booking<span class="black-w3ls">Events is a professionally managed Event</span></h3>
-        <div class="about-grids">
-
-            <div class="abt-rt-grid">
-                <div class="w3ls-grid-head text-center">
-                    <h3>online event booking </h3>
-                </div>
-                <div class="abt-form text-center">
-                    <form action="#" method="post">
-                        <div class="col-sm-4 col-xs-4 w3ls-lt-form">
-                            <div class="w3ls-pr">
-                                <select class="sel" required="">
-                                    <option value="">location</option>
-                                    <option value="">location2</option>
-                                    <option value="">location3</option>
-                                    <option value="">location4</option>
-                                    <option value="">location5</option>
-                                </select>
-                                <input type="text" name="Name" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-4 w3ls-lt-form">
-                            <div class="w3ls-pr">
-                                <input type="date" name="date" required="required">
-                                <input type="tel" name="phone no" placeholder="Phone no" required="required">
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-4 w3ls-lt-form">
-                            <div class="w3ls-pr">
-                                <input type="time" name="time" required="required">
-                                <input type="email" name="email" placeholder="Email" required="required">
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <input type="submit" value="Book Now">
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--testimonials-->
-<div class="testimonials">
-    <div class="container">
-        <h3 class="heading-agileinfo">Event Manager Says<span>Events is a professionally managed Event</span></h3>
-        <div class="flex-slider">
-            <ul id="flexiselDemo1">
-                <li>
-                    <div class="laptop">
-                        <div class="col-md-8 team-right">
-                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                adipisci velit, sed quia non numquam.</p>
-                            <div class="name-w3ls">
-                                <h5>Federer</h5>
-                                <span>lorem ipsum</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 team-left">
-                            <img class="img-responsive" src="images/t1.jpg" alt=" " />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="laptop">
-                        <div class="col-md-8 team-right">
-                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                adipisci velit, sed quia non numquam.</p>
-                            <div class="name-w3ls">
-                                <h5>Thompson</h5>
-                                <span>lorem ipsum</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 team-left">
-                            <img class="img-responsive" src="images/t2.jpg" alt=" " />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-
-    </div>
-</div>
+<
 <!--//testimonials-->
 
 <!-- footer-top -->
@@ -395,24 +141,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <div class="col-md-3 foot-left">
             <h3>About Us</h3>
-
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+            <p>{{$data['about'][0]->description}}</p>
         </div>
         <div class="col-md-3 foot-left">
-            <h3>Get In Touch</h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+            <h3>GET IN TOUCH</h3>
+            <p>L{{$data['configurations']->website}}</p>
 
             <div class="contact-btm">
                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                <p>90 Street, City, State 34789.</p>
+                <p>{{$data['configurations']->address}}</p>
             </div>
             <div class="contact-btm">
                 <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                <p>+456 123 7890</p>
+                <p>{{$data['configurations']->phone}}</p>
                 <div class="contact-btm">
                 </div>
                 <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                <p><a href="mailto:example@email.com">info@example.com</a></p>
+                <p><a href="mailto:example@email.com">{{$data['configurations']->email}}</a></p>
             </div>
             <div class="clearfix"></div>
 
@@ -420,13 +165,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="col-md-3 foot-left">
             <h3>Latest Events</h3>
             <ul>
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><img src="images/g1.jpg" alt="" class="img-responsive"></a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><img src="images/g2.jpg" alt="" class="img-responsive"></a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><img src="images/g3.jpg" alt="" class="img-responsive"></a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><img src="images/g4.jpg" alt="" class="img-responsive"></a></li>
+                @foreach($data['latest_events'] as $latest_event)
+                    {{--@php($image = $latest_event->images->first())--}}
+                <li><a class="example-image-link" href="{{asset('images/event/' . $latest_event->image)}}" data-lightbox="example-set"  data-title="{{$latest_event->title}}">
+                        <img src='{{asset('images/event/' . $latest_event->image)}}'  alt="event-image1"  class="img-responsive" />
+                    </a></li>
+                    @endforeach
             </ul>
             <div class="clearfix"></div>
         </div>
+
         <div class="col-md-3 foot-left">
             <h3>Subscribe</h3>
             <p>Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum has </p>
@@ -436,6 +184,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </form>
         </div>
         <div class="clearfix"></div>
+        <li><a class="hvr-sweep-to-right" href="{{route('frontend.faq')}}">FAQ</a></li>
+        <li><a class="hvr-sweep-to-right" href="{{route('frontend.terms')}}">Terms and Conditions</a></li>
     </div>
 </div>
 <!-- /footer-top -->
@@ -445,52 +195,67 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <div class="col-md-6 col-sm-6 col-xs-6 copy-right-grids">
             <div class="copy-left">
-                <p>&copy; 2017 Events. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                <p>&copy; {{date('Y')}} Events. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-6 top-middle">
             <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                <li><a href="{{$data['configurations']->fb_link}}"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="{{$data['configurations']->twitter_link}}"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="{{$data['configurations']->google_link}}"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="{{$data['configurations']->vimeo_link}}"><i class="fa fa-vimeo"></i></a></li>
             </ul>
         </div>
         <div class="clearfix"></div>
+
     </div>
 </div>
 
-<!-- //footer -->
-<!-- bootstrap-modal-pop-up -->
-<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                Events
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <img src="images/g8.jpg" alt=" " class="img-responsive" />
-                <p>Ut enim ad minima veniam, quis nostrum
-                    exercitationem ullam corporis suscipit laboriosam,
-                    nisi ut aliquid ex ea commodi consequatur? Quis autem
-                    vel eum iure reprehenderit qui in ea voluptate velit
-                    esse quam nihil molestiae consequatur, vel illum qui
-                    dolorem eum fugiat quo voluptas nulla pariatur.
-                    <i>" Quis autem vel eum iure reprehenderit qui in ea voluptate velit
-                        esse quam nihil molestiae consequatur.</i></p>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- //bootstrap-modal-pop-up -->
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
-<script src="js/jquery-2.2.3.min.js"></script>
+<script src="{{asset('frontend/js/jquery-2.2.3.min.js')}}"></script>
+<script src="{{asset('frontend/js/bootstrap.js')}}"></script>
 
-<!-- skills -->
+<script>
+    $(document).ready(function () {
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    })
+</script>
 
-<script src="js/responsiveslides.min.js"></script>
+<script type="text/javascript">
+    var dthen1 = new Date("12/25/17 11:59:00 PM");
+    start = "05/03/15 03:02:11 AM";
+    start_date = Date.parse(start);
+    var dnow1 = new Date(start_date);
+    if (CountStepper > 0)
+        ddiff = new Date((dnow1) - (dthen1));
+    else
+        ddiff = new Date((dthen1) - (dnow1));
+    gsecs1 = Math.floor(ddiff.valueOf() / 1000);
+
+    var iid1 = "countbox_1";
+    CountBack_slider(gsecs1, "countbox_1", 1);
+
+    var dthen1 = new Date("12/12/17 11:59:00 PM");
+    start = "01/20/16 03:02:11 AM";
+    start_date = Date.parse(start);
+    var dnow1 = new Date(start_date);
+    if (CountStepper > 0)
+        ddiff = new Date((dnow1) - (dthen1));
+    else
+        ddiff = new Date((dthen1) - (dnow1));
+    gsecs1 = Math.floor(ddiff.valueOf() / 1000);
+
+    var iid1 = "countbox_2";
+    CountBack_slider(gsecs1, "countbox_2", 1);
+</script>
+
+<!-- //here ends scrolling icon -->
+
 <script>
     // You can also use "$(window).load(function() {"
     $(function () {
@@ -534,7 +299,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!-- start-smoth-scrolling -->
 <!-- OnScroll-Number-Increase-JavaScript -->
-<script type="text/javascript" src="js/numscroller-1.0.js"></script>
+<script type="text/javascript" src="{{asset('frontend/js/numscroller-1.0.js')}}"></script>
 <!-- //OnScroll-Number-Increase-JavaScript -->
 <!--flexiselDemo1 -->
 <script type="text/javascript">
@@ -564,11 +329,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     });
 </script>
-<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+<script type="text/javascript" src="{{asset('frontend/js/jquery.flexisel.js')}}"></script>
 <!--//flexiselDemo1 -->
 
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{{asset('frontend/js/move-top.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/js/easing.js')}}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".scroll").click(function(event){
@@ -578,7 +343,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     });
 </script>
 <!-- start-smoth-scrolling -->
-<script src="js/bootstrap.js"></script>
+<script src="{{asset('frontend/js/bootstrap.js')}}"></script>
 <!-- //for bootstrap working -->
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
@@ -597,5 +362,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     });
 </script>
 <!-- //here ends scrolling icon -->
+
 </body>
 </html>

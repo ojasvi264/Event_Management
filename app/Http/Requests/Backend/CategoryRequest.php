@@ -27,9 +27,9 @@ class CategoryRequest extends FormRequest
             'name' => 'required|max:191|string|unique:categories'.(request()->method()=="POST"?'':',name,'.$this->id),
             'rank' => 'required|integer',
             'slug' => 'required|max:191|string|unique:categories'.(request()->method()=="POST"?'':',slug,'.$this->id),
-            'meta_keyword' => 'string|max:191',
-            'meta_description' => 'string|max:191',
-            'photo'=>'max:500',
+//            'meta_keyword' => 'string|max:191',
+//            'meta_description' => 'string|max:191',
+            'photo'=>'required|max:1500',
         ];
     }
     function messages()
@@ -46,10 +46,11 @@ class CategoryRequest extends FormRequest
             'slug.required'=>'Slug field is required',
             'slug.string'=>'Slug field must be of String type',
 
-            'meta_keyword.string'=>'Meta keyword must be of string type',
-            'meta_description.string'=>'Meta description must be of string type',
+//            'meta_keyword.string'=>'Meta keyword must be of string type',
+//            'meta_description.string'=>'Meta description must be of string type',
 
-            'photo.file'=>'Photo file must be file type',
+            'photo.required'=>'Image field is required',
+            'photo.file'=>'Image file must be file type',
         ];
     }
 }

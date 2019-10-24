@@ -75,6 +75,7 @@ class TestimonialController extends Controller
     public function show($id)
     {
         $data['testimonial']=Testimonial::find($id);
+        $data['testimonials']=Testimonial::where('id', $id)->get();
         return view('backend.testimonial.show', compact('data'));
     }
 

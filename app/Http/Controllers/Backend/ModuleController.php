@@ -63,6 +63,7 @@ class ModuleController extends Controller
     public function show($id)
     {
         $data['module']=Module::find($id);
+        $data['modules']=Module::where('id', $id)->get();
         return view('backend.module.show',compact('data'));
     }
 

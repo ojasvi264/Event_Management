@@ -1,4 +1,8 @@
 <div class="form-group">
+    {!!  Form::label('category_id', 'Category Name'); !!}
+    {!! Form::select('category_id', $data['categories'],null,['class' => 'form-control']); !!}
+</div>
+<div class="form-group">
     {!!  Form::label('name', 'Name'); !!}
     {!! Form::text('name', null,['class' => 'form-control','id' => 'name','placeholder' => 'Enter name']); !!}
     @include('includes.single_field_validation',['field'=>'name'])
@@ -9,7 +13,12 @@
 
     @include('includes.single_field_validation',['field'=>'title'])
 </div>
+<div class="form-group">
+    {!!  Form::label('slug', 'Slug'); !!}
+    {!! Form::text('slug', null,['class' => 'form-control','id' => 'slug']); !!}
 
+    @include('includes.single_field_validation',['field'=>'slug'])
+</div>
 <div class="form-group">
     {!!  Form::label('date', 'Date'); !!}
     {!! Form::date('date', null,['class' => 'form-control','id' => 'date']); !!}

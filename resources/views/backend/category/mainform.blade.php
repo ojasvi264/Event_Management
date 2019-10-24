@@ -17,18 +17,19 @@
     @include('includes.single_field_validation',['field'=>'slug'])
 </div>
 <div class="form-group">
+    <i class="fa fa-picture-o"></i>
     {!!  Form::label('photo', 'Image'); !!}
-    {!! Form::file('photo', null,['class' => 'form-control','id' => 'photo']); !!}
+    {!! Form::file('photo', null,['class' => 'form-control','id' => 'lfm']); !!}
 
     @include('includes.single_field_validation',['field'=>'photo'])
 </div>
 
-<div class="form-group">
-    {!!  Form::label('icon', 'Icon'); !!}
-    {!! Form::file('icon', null,['class' => 'form-control','id' => 'icon']); !!}
+{{--<div class="form-group">--}}
+    {{--{!!  Form::label('icon', 'Icon'); !!}--}}
+    {{--{!! Form::file('icon', null,['class' => 'form-control','id' => 'icon']); !!}--}}
 
-    @include('includes.single_field_validation',['field'=>'icon'])
-</div>
+    {{--@include('includes.single_field_validation',['field'=>'icon'])--}}
+{{--</div>--}}
 
 <div class="form-group">
     {!!  Form::label('meta_keyword', 'Meta Keyword'); !!}
@@ -48,3 +49,4 @@
     {!! Form::radio('status', '1') !!} Active
     {!! Form::radio('status', '0',true) !!} De Active
 </div>
+<script>

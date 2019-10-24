@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Backend\EventRequest;
+use App\Model\Category;
 use App\Model\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,7 +31,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('backend.event.create');
+        $data['categories'] = Category::pluck('name', 'id');
+        return view('backend.event.create', compact('data'));
     }
 
     /**
@@ -76,6 +78,7 @@ class EventController extends Controller
     public function show($id)
     {
         $data['event']=Event::find($id);
+        $data['events']=Event::where('id', $id)->get();
         return view('backend.event.show', compact('data'));
     }
 
@@ -87,6 +90,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $data['categories'] = Category::pluck('name', 'id');
         $data['event']=Event::find($id);
         return view('backend.event.edit', compact('data'));
     }
@@ -141,4 +145,14 @@ class EventController extends Controller
         return redirect()->route('event.index');
     }
 
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+//        $events = DB::table('events')->where('name', 'like', '%'.$search.'%');
+//        $data['events']=Event::all();
+        $data['events'] = Event::where('name', 'LIKE', '%'.$search.'%')->get();
+        return view('backend.event.search',compact('data'));
+    }
 }
+

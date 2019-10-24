@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','User Create page')
+@section('title','User view page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -15,9 +15,9 @@
                 List
             </a>        </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">User</a></li>
-            <li class="active">Create User</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('user.index')}}">User</a></li>
+            <li class="active">View User</li>
         </ol>
     </section>
 
@@ -27,7 +27,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create User</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -43,7 +43,7 @@
                     <thead>
                     <tr>
                         <th>Role Id</th>
-                        <td>{{$data['user']->role_id}}</td>
+                        <td>{{$data['user']->role->name}}</td>
                     </tr>
                     <tr>
                         <th>Name</th>
@@ -80,6 +80,23 @@
 {{--                            @endif--}}
 {{--                            {{$data['user']->updated_at}}</td>--}}
 {{--                    </tr>--}}
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['users'] as $user)
+                            <td>
+                                <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('user.destroy',$user->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
+                    </tr>
                     </thead>
                 </table>
             </div>

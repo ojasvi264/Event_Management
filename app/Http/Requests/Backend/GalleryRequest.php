@@ -24,7 +24,23 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:191|string',
+            'title' => 'string|max:255',
+            'rank' => 'required|integer',
+            'photo'=>'required|max:500',
+        ];
+    }
+    function messages()
+    {
+        return[
+            'title.required'=>'Title field is required',
+            'title.string'=>'Title field must be of String type',
+
+            'rank.required'=>'Rank field is required',
+            'rank.integer'=>'Rank field must be of integer type',
+
+            'photo.required'=>'Image field is required',
+            'photo.file'=>'Image file must be file type',
         ];
     }
 }

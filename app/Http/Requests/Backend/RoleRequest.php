@@ -24,7 +24,15 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:191|string',
+        ];
+    }
+    function messages()
+    {
+        return[
+            'name.required'=>'Please Enter Your Name',
+            'name.unique'=>'Name must be unique',
+            'name.string'=>'Name must be of string type',
         ];
     }
 }

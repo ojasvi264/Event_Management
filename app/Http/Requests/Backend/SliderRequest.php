@@ -24,7 +24,26 @@ class SliderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:191|string',
+            'description' => 'required|string|max:191',
+            'link' => 'string|max:191',
+            'photo'=>'required|max:500',
+        ];
+    }
+
+    function messages()
+    {
+        return[
+            'title.required'=>'Name field is required',
+            'title.string'=>'Name field must be of String type',
+
+            'description.required'=>'Description field is required',
+            'description.string'=>'Description field must be of String type',
+
+            'link.string'=>'Link must be of string type',
+
+            'photo.required'=>'Image field is required',
+            'photo.file'=>'Photo file must be file type',
         ];
     }
 }

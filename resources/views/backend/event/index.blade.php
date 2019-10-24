@@ -12,9 +12,9 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Event</a></li>
-            <li class="active">Create page</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('event.create')}}">Event</a></li>
+            <li class="active">Index page</li>
         </ol>
     </section>
 
@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Title</h3>
+                <h3 class="box-title">Index Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -40,8 +40,10 @@
                     <thead>
                     <tr>
                         <th>SN</th>
+                        <th>Category Name</th>
                         <th>Name</th>
                         <th>Title</th>
+                        <th>Slug</th>
                         <th>Registration</th>
                         <th>Location</th>
                         <th>cost</th>
@@ -57,8 +59,10 @@
                     @foreach($data['events'] as $event)
                         <tr>
                             <td>{{$i++}}</td>
+                            <td>{{$event->category_id}}</td>
                             <td>{{$event->name}}</td>
                             <td>{{$event->title}}</td>
+                            <td>{{$event->slug}}</td>
                             <td>{{$event->registration}}</td>
                             <td>{{$event->location}}</td>
                             <td>{{$event->cost}}</td>

@@ -75,6 +75,7 @@ class TeamController extends Controller
     public function show($id)
     {
         $data['team']=Team::find($id);
+        $data['teams']=Team::where('id', $id)->get();
         return view('backend.team.show', compact('data'));
     }
 

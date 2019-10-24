@@ -24,7 +24,26 @@ class ServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:191|string|unique:services'.(request()->method()=="POST"?'':',name,'.$this->id),
+            'title' => 'string|max:191',
+            'description' => 'string|max:191',
+            'photo'=>'required|max:500',
+        ];
+    }
+
+    function messages()
+    {
+        return[
+            'name.unique'=>'Name must be unique',
+            'name.required'=>'Name field is required',
+            'name.string'=>'Name field must be of String type',
+
+            'title.string'=>'Title must be of string type',
+
+            'description.string'=>'Meta description must be of string type',
+
+            'photo.required'=>'Image field is required',
+            'photo.file'=>'Image file must be file type',
         ];
     }
 }

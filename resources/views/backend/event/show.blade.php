@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Event View page')
+@section('title','Event view page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -15,8 +15,8 @@
                 List
             </a>        </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Event</a></li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('event.index')}}">Event</a></li>
             <li class="active">View page</li>
         </ol>
     </section>
@@ -27,7 +27,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Title</h3>
+                <h3 class="box-title">View Page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -48,6 +48,10 @@
                     <tr>
                         <th>Title</th>
                         <td>{{$data['event']->title}}</td>
+                    </tr>
+                    <tr>
+                        <th>Slug</th>
+                        <td>{{$data['event']->slug}}</td>
                     </tr>
                     <tr>
                         <th>Registration</th>
@@ -94,9 +98,38 @@
                         <th>Deleted At</th>
                         <td></td>
                     </tr>
+                    <tr>
+                        <th>Action</th>
+                        @foreach($data['events'] as $event)
+                            <td>
+                                <a href="{{route('event.edit',$event->id)}}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </a>
+                                <form action="{{route('event.destroy',$event->id)}}" method="post"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                </form>
+                            </td>
+                        @endforeach
+                    </tr>
                     </thead>
                 </table>
+                <div class="row">
+                    {{--{{$data['event']->image}}--}}
+                    <div class="col-md-3">
+                        <div class="img-container">
+                            <button class="btn btn-danger btn-close">X</button>
+                            <img src="{{asset('images/event/' .$data['event']->image)}}" alt="" height="100" width="100">
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
+        </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 Footer

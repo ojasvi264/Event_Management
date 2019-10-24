@@ -15,6 +15,8 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         //fetch all dta from booking model
@@ -45,7 +47,7 @@ class BookingController extends Controller
         //dd($request->all());
         $booking=Booking::create($request->all());
         if ($booking) {
-            $request->session()->flash('success_message', 'Booking created Successfully');
+            $request->session()->flash('success_message', 'Booking Saved Successfully');
             return redirect()->route('booking.index');
 
         }else{
@@ -112,7 +114,7 @@ class BookingController extends Controller
     {
         $booking=Booking::find($id);
         if ($booking->delete()) {
-            $request->session()->flash('success_message', 'Booking Deleted Successfully');
+            $request->session()->flash('success_message', 'Booking Saved Successfully');
 
         }else{
             $request->session()->flash('error_message','Booking Deleted Failed');

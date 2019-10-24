@@ -12,9 +12,9 @@
             </a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Configuration</a></li>
-            <li class="active">Create page</li>
+            <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{route('configuration.create')}}">Configuration</a></li>
+            <li class="active">Index page</li>
         </ol>
     </section>
 
@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Configuration</h3>
+                <h3 class="box-title">Index page</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -77,10 +77,6 @@
                 </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
-                Footer
-            </div>
-            <!-- /.box-footer-->
         </div>
         <!-- /.box -->
 

@@ -19,6 +19,9 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('backend/dist/css/skins/_all-skins.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/dist/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,6 +29,8 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
     <![endif]-->
 
     <!-- Google Font -->
@@ -37,7 +42,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{route('home')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -105,7 +110,7 @@
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('backend.profile') }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a class="dropdown-item btn btn-info" href="{{ route('logout') }}"
@@ -122,9 +127,9 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
+                    {{--</li>--}}
                 </ul>
             </div>
         </nav>
@@ -147,16 +152,58 @@
                 </div>
             </div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
+            <form action="{{route('event.search')}}" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="search" class="form-control" placeholder="Search events....">
                     <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="" id="" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
                 </div>
             </form>
+
+            {{--<div class="box-body">--}}
+        {{--<table class="table table-stripped">--}}
+        {{--<thead>--}}
+        {{--<tr>--}}
+        {{--<th>SN</th>--}}
+        {{--<th>Name</th>--}}
+        {{--<th>Title</th>--}}
+        {{--<th>Action</th>--}}
+        {{--</tr>--}}
+        {{--</thead>--}}
+        {{--<tbody>--}}
+        {{--@php($i=1)--}}
+        {{--@foreach($data['events'] as $event)--}}
+        {{--<tr>--}}
+        {{--<td>{{$i++}}</td>--}}
+        {{--<td>{{$data['events']->name}}</td>--}}
+        {{--<td>{{$data['events']->title}}</td>--}}
+        {{--<td>--}}
+        {{--<a href="{{route('event.show',$event->id)}}" class="btn btn-info">--}}
+        {{--<i class="fa fa-eye"></i>--}}
+        {{--View--}}
+        {{--</a>--}}
+        {{--<a href="{{route('event.edit',$event->id)}}" class="btn btn-warning">--}}
+        {{--<i class="fa fa-pencil"></i>--}}
+        {{--Edit--}}
+        {{--</a>--}}
+        {{--<form action="{{route('event.destroy',$event->id)}}" method="post"--}}
+        {{--onsubmit="return confirm('Are you sure?')">--}}
+        {{--@csrf--}}
+        {{--<input type="hidden" name="_method" value="DELETE"/>--}}
+        {{--<button class="btn-danger"><i class="fa fa-trash"></i>Delete</button>--}}
+        {{--</form>--}}
+        {{--</td>--}}
+        {{--</tr>--}}
+        {{--@endforeach--}}
+        {{--</tbody>--}}
+        {{--</table>--}}
+            {{--</div>--}}
             <!-- /.search form -->
+
+
+
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
@@ -195,27 +242,27 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Booking Management</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('booking.create')}}"><i class="fa fa-plus"></i> Create</a></li>
-                        <li><a href="{{route('booking.index')}}"><i class="fa fa-list"></i> List</a></li>
-                    </ul>
-                </li>
+                {{--<li class="treeview">--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-files-o"></i>--}}
+                        {{--<span>Booking Management</span>--}}
+                    {{--</a>--}}
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li><a href="{{route('booking.create')}}"><i class="fa fa-plus"></i> Create</a></li>--}}
+                        {{--<li><a href="{{route('booking.index')}}"><i class="fa fa-list"></i> List</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Contact Management</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('contact.create')}}"><i class="fa fa-plus"></i> Create</a></li>
-                        <li><a href="{{route('contact.index')}}"><i class="fa fa-list"></i> List</a></li>
-                    </ul>
-                </li>
+                {{--<li class="treeview">--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-files-o"></i>--}}
+                        {{--<span>Contact Management</span>--}}
+                    {{--</a>--}}
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li><a href="{{route('contact.create')}}"><i class="fa fa-plus"></i> Create</a></li>--}}
+                        {{--<li><a href="{{route('contact.index')}}"><i class="fa fa-list"></i> List</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
 
 
                 <li class="treeview">
@@ -356,7 +403,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.4.0
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        <strong>Copyright {{date('Y')}} <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
         reserved.
     </footer>
     </form>

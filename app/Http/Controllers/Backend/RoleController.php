@@ -59,6 +59,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $data['role'] = Role::find($id);
+        $data['roles']=Role::where('id', $id)->get();
         return view('backend.role.show', compact('data'));
     }
 

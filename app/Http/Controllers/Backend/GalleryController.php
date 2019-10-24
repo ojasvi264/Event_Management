@@ -77,6 +77,7 @@ class GalleryController extends Controller
     {
 
         $data['gallery']=Gallery::find($id);
+        $data['galleries']=Gallery::where('id', $id)->get();
        // dd($data);
         return view('backend.gallery.show', compact('data'));
     }
